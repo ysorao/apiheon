@@ -1,5 +1,5 @@
 import { Router} from 'express';
-import { getInfo, getInfoHabeas, getInfoHabeasMenor, createHabeas,createHabeasMenor, getInfoMDById, updateHabeasMenor, createInfo, getInfoHabeasById, getInfoHabeasMenorById } from '../controllers/info.controllers'
+import { getInfo, getInfoById, getInfoHabeas, getInfoHabeasMenor, createHabeas,createHabeasMenor, getInfoMDById, updateHabeasMenor, createInfo, getInfoHabeasById, getInfoHabeasMenorById } from '../controllers/info.controllers'
 
 const jwt = require('jsonwebtoken')
 
@@ -32,7 +32,9 @@ const router = Router()
 
 router.get('/info',verifyToken, getInfo)
 
-router.get('/infoMD/:id', getInfoMDById)
+router.get('/info/:id',verifyToken, getInfoById)
+
+router.get('/infoMD/:id', verifyToken, getInfoMDById)
 
 router.get('/infoHabeas', verifyToken, getInfoHabeas )
 

@@ -10,20 +10,38 @@ export const getInfo = async (req, res) => {
   }else{
     res.json(result.recordset);
   }
+  sql.close()
+};
+
+
+//CONSULTAR LA INFORMACION INDIVIDUAL DE ACEPTACION DE TTO DATOS
+export const getInfoById = async (req, res) => {
+  const { id } = req.params;
+  const pool = await getConnection();
+  const result = await pool.request().input("id", sql.VarChar, id).query(queries.getInfoById);
+  if(result.rowsAffected < 1){
+    res.json({
+      status:204,
+      total: 0}).status(204)
+  
+  }else{
+    res.json(result.recordset);
+  }
+  sql.close()
 };
 
 
 //CONSULTAR LA  INFORMACION INDIVIDUAL DE NOMINA
 export const getInfoMDById = async (req, res) => {
   const { id } = req.params;
-  const pool = await getConnectionMD();
-  const result = await pool.request().input("id", sql.VarChar, id).query(queries.getInfoMDById);
+  const poolMD = await getConnectionMD();
+  const result = await poolMD.request().input("id", sql.VarChar, id).query(queries.getInfoMDById);
   if(result.rowsAffected < 1){
     res.sendStatus(204)
   }else{
     res.json(result.recordset);
-
   }
+  sql.close()
 };
 
 
@@ -32,6 +50,8 @@ export const getInfoHabeas = async (req, res) => {
   const pool = await getConnection();
   const result = await pool.request().query("SELECT * FROM InfoheonHabeasData");
   res.json(result.recordset);
+  sql.close()
+
 };
 
 
@@ -45,6 +65,8 @@ export const getInfoHabeasById = async (req, res) => {
   }else{
     res.json(result.recordset);
   }
+  sql.close()
+
 };
 
 
@@ -53,6 +75,8 @@ export const getInfoHabeasMenor = async (req, res) => {
   const pool = await getConnection();
   const result = await pool.request().query(queries.getInfoHabeasMenor);
   res.json(result.recordset);
+  sql.close()
+
 };
 
 //CONSULTAR LA INFORMACION INDIVIDUAL DE ACEPTACION DE TTO DATOS MENORES
@@ -65,6 +89,8 @@ export const getInfoHabeasMenorById = async (req, res) => {
   }else{
     res.json(result.recordset);
   }
+  sql.close()
+
 };
 
 
@@ -87,6 +113,8 @@ export const createHabeas = async (req, res) => {
     }else{
       res.sendStatus(204)
     }
+  sql.close()
+
 
 };
 
@@ -110,6 +138,8 @@ export const createHabeasMenor = async (req, res) => {
     }else{
       res.sendStatus(204)
     }
+  sql.close()
+
 };
 
 //ACTUALIZAR LA INFORMACION DE TTO DE DATOS MENORES DE EDAD
@@ -131,6 +161,8 @@ export const updateHabeasMenor = async (req, res) =>{
     .query(queries.updateHabeasMenor);
 
     res.json(result)
+  sql.close()
+
 
 }
 
@@ -240,5 +272,7 @@ export const createInfo =  async (req, res) => {
         }
 
       }
+  sql.close()
+
 
 };

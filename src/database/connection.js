@@ -33,8 +33,8 @@ export async function getConnection() {
 
 export async function getConnectionMD() {
   try {
-    const pool = await sql.connect(dbSettingsMD);
-    return pool;
+    const poolMD = await sql.connect(dbSettingsMD);
+    return poolMD;
   } catch (error) {
     console.log(error);
   }

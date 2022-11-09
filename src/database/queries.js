@@ -1,5 +1,6 @@
 export const queries = {
   getInfo: "SELECT * FROM InformacionHeon",
+  getInfoById: "SELECT * FROM InformacionHeon WHERE identificacion = @id",
   getInfoMDById: `SELECT 
     A.EMPLEADO Collate SQL_Latin1_General_CP1253_CI_AI		        AS DOCUMENTO
     , A.APELLIDO Collate SQL_Latin1_General_CP1253_CI_AI		    AS APELLIDOS
