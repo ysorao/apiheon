@@ -16,6 +16,12 @@ export const queries = {
     WHERE A.EMPLEADO = @id`,
   getInfoHabeasMenor: "SELECT * FROM InfoheonHabeasDataMenorEdad",
 
+  getInfoHabeasMenorById: "SELECT * FROM InfoheonHabeasDataMenorEdad WHERE documento = @id",
+
+  getInfoHabeas: "SELECT * FROM InfoheonHabeasData",
+
+  getInfoHabeasById: "SELECT * FROM InfoheonHabeasData WHERE documento = @id",
+
   createHabeas:
     "INSERT INTO infoheonHabeasData (documento, fecha, estado, ipAddress, usuario, nombreCompleto) VALUES (@documento, @fecha, @estado, @ipAddress, @usuario, @nombreCompleto)",
     

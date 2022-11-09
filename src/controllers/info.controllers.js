@@ -35,12 +35,38 @@ export const getInfoHabeas = async (req, res) => {
 };
 
 
+//CONSULTAR LA INFORMACION INDIVIDUAL DE ACEPTACION DE TTO DATOS
+export const getInfoHabeasById = async (req, res) => {
+  const { id } = req.params;
+  const pool = await getConnection();
+  const result = await pool.request().input("id", sql.VarChar, id).query(queries.getInfoHabeasById);
+  if(result.rowsAffected < 1){
+    res.sendStatus(204)
+  }else{
+    res.json(result.recordset);
+  }
+};
+
+
 //CONSULTAR LA INFORMACION DE ACEPTACION DE TTO DATOS  MENORES
 export const getInfoHabeasMenor = async (req, res) => {
   const pool = await getConnection();
   const result = await pool.request().query(queries.getInfoHabeasMenor);
   res.json(result.recordset);
 };
+
+//CONSULTAR LA INFORMACION INDIVIDUAL DE ACEPTACION DE TTO DATOS MENORES
+export const getInfoHabeasMenorById = async (req, res) => {
+  const { id } =req.params;
+  const pool = await getConnection();
+  const result = await pool.request().input("id", sql.VarChar, id).query(queries.getInfoHabeasMenorById);
+  if(result.rowsAffected < 1){
+    res.sendStatus(204)
+  }else{
+    res.json(result.recordset);
+  }
+};
+
 
 //INSERTAR LA ACEPTACION DE TTO DE DATOS
 export const createHabeas = async (req, res) => {
@@ -107,7 +133,6 @@ export const updateHabeasMenor = async (req, res) =>{
     res.json(result)
 
 }
-
 
 
 
